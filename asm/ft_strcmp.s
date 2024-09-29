@@ -2,68 +2,60 @@
 	global ft_strcmp
 
 ft_strcmp:
-	xor		rcx, rcx		;	init i = 0
-	xor		rax, rax		;	init ret
-	xor		r8b, r8b		
-	xor		r9b, r9b		
-	cmp		rsi, 0			;	comp param0
-	jz		isNull			;	return if param0 = 0
-	cmp		rdi, 0			;	comp param0
-	jz		isNull			;	return if param0 = 0
-	jmp		comp			;	copy
+	xor		rcx, rcx			;	init i = 0
+	xor		rax, rax			;	init ret
+	cmp		rsi, 0				;	comp param0
+	jz		isNull				;	return if param0 = 0
+	cmp		rdi, 0				;	comp param0
+	jz		isNull				;	return if param0 = 0
+	jmp		compare				;	copy
 
 isNull:
-	cmp		rsi, rdi;
-	jz		zero; null
-	jg		sup; s1>
-	jmp		inf; s1<
+	cmp		rsi, rdi			;
+	jz		zero				; null
+	jg		sup					; s1>
+	jmp		inf					; s1<
 
 increment:
-	inc		rcx;
+	inc		rcx					;
+	jmp		compare				;
 
-comp:
-	jmp		isCharNull
+checkFirst:
+	mov		dl, BYTE[rsi + rcx]	;
+	cmp		dl, 0				;
+	jz		zero				;
+	jmp		inf					;
 
-isEnd:
-	mov		r8b, BYTE [rsi + rcx]
-	mov		r9b, BYTE [rdi + rcx]
-	cmp		r8b, 0;
-	jz		end1;
-	cmp		r9b, 0;
-	jz		end2;
-	jmp		increment;
-	jmp		comp;
+checkSecond:
+	mov		dl, BYTE[rdi + rcx]	;
+	cmp		dl, 0				;
+	jz		zero				;
+	jmp		sup					;
 
-end1:
-	mov		r9b, BYTE [rdi + rcx]
-	cmp		r9b, 0
-	jz		zero
-	jmp		sup
-
-end2:
-	mov		r8b, BYTE [rsi + rcx]
-	cmp		r8b, 0
-	jz		zero
-	jmp		inf
-
-isCharNull:
-	mov		r8b, BYTE [rsi + rcx]
-	mov		r9b, BYTE [rdi + rcx]
-	cmp		r8b, r9b;
-	jz		isEnd; null
-	jl		inf; s1<
-	jg		sup; s1>
+compare:
+	mov		dl, BYTE[rsi + rcx]	; 
+	cmp		dl, 0				;
+	jz		checkSecond			;
+	mov		dl, BYTE[rdi + rcx]	;
+	cmp		dl, 0				;
+	jz		checkFirst			;	check if end of str
+	mov		dl, BYTE[rsi + rcx]	;
+	cmp		dl, BYTE[rdi + rcx]	;
+	jl		sup					;
+	jg		inf					;	check if sup or inf
+	jmp		increment			;
 
 zero:
-	mov		rax, 0;
-	jmp		return;
+	mov		rax, 0				;
+	jmp		return				;
 
 sup:
-	mov		rax, 1;
-	jmp		return;
+	mov		rax, 1				;
+	jmp		return				;
 
 inf:
-	mov		rax, -1;
-	jmp		return;
+	mov		rax, -1				;
+	jmp		return				;
+
 return:
-	ret	;
+	ret							;
