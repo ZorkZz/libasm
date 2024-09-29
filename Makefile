@@ -1,10 +1,10 @@
 NAME = libasm.a
 
-SRCS = asm/ft_strlen.s asm/ft_strcpy.s asm/ft_strcmp.s
+SRCS = asm/ft_strlen.s asm/ft_strcpy.s asm/ft_strcmp.s asm/ft_write.s
 
 SRCS_TEST = main.c
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror 
 
 CC = cc
 
