@@ -10,6 +10,7 @@ char		*ft_strcpy(char *dest, char const *src);
 int			ft_strcmp(char const *s1, char const *s2);
 ssize_t		ft_write(int fd, char const *str, size_t len);
 ssize_t		ft_read(int fd, char const *str, size_t len);
+char		*ft_strdup(char const *str);
 
 void	test_strlen();
 void	test_strcpy();
@@ -19,16 +20,18 @@ void	test_read();
 
 int	main(void)
 {
-	printf("\n\n----STRLEN----\n");
-	test_strlen();
-	printf("\n\n----STRCPY----\n");
-	test_strcpy();
-	printf("\n\n----STRCMP----\n");
-	test_strcmp();
-	printf("\n\n----WRITE----\n");
-	test_write();
-	printf("\n\n----READ----\n");
-	test_read();
+	// printf("\n\n----STRLEN----\n");
+	// test_strlen();
+	// printf("\n\n----STRCPY----\n");
+	// test_strcpy();
+	// printf("\n\n----STRCMP----\n");
+	// test_strcmp();
+	// printf("\n\n----WRITE----\n");
+	// test_write();
+	// printf("\n\n----READ----\n");
+	// test_read();
+
+	printf("%s\n", ft_strdup("caca"));
 
 	return (0);
 }

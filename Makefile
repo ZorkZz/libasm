@@ -1,6 +1,6 @@
 NAME = libasm.a
 
-SRCS = asm/ft_strlen.s asm/ft_strcpy.s asm/ft_strcmp.s asm/ft_write.s asm/ft_read.s
+SRCS = asm/ft_strlen.s asm/ft_strcpy.s asm/ft_strcmp.s asm/ft_write.s asm/ft_read.s asm/ft_strdup.s
 
 SRCS_TEST = main.c
 
