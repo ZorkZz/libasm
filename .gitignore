@@ -2,3 +2,4 @@
 *.zozo
 libasm.a
 test.run
+write_read

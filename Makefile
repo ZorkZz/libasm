@@ -1,6 +1,6 @@
 NAME = libasm.a
 
-SRCS = asm/ft_strlen.s asm/ft_strcpy.s asm/ft_strcmp.s asm/ft_write.s
+SRCS = asm/ft_strlen.s asm/ft_strcpy.s asm/ft_strcmp.s asm/ft_write.s asm/ft_read.s
 
 SRCS_TEST = main.c
 
@@ -13,7 +13,7 @@ OBJS = $(SRCS:.s=.zizi)
 OBJS_TEST = $(SRCS_TEST:.c=.zozo)
 
 NA = nasm
-NA_FLAGS = -f elf64
+NA_FLAGS = -f elf64 
 TEST_FLAGS = -lasm -L .
 
 RM = rm -f
@@ -35,11 +35,13 @@ all: $(NAME) test
 	@printf	"$(YELLOW) $(DELETE_LINE)Creating -c $< -o $\n $(ENDL)"
 
 $(NAME): $(OBJS)
+	@touch write_read
 	@ar -rcs $(NAME) $(OBJS)
 	@ranlib $(NAME)
 	@printf	"$(GREEN) $(DELETE_LINE)Compiling $(NAME) : DONE $(ENDL)\n"
 
 clean:
+	$(RM) write_read
 	$(RM) $(OBJS)
 	$(RM) $(OBJS_TEST)
 	@printf	"$(RED)Deleting objects : DONE $(RED)\n"

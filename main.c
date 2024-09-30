@@ -1,27 +1,34 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <errno.h>
+#include <unistd.h>
+#include <fcntl.h>
 
-size_t	ft_strlen(const char * str);
-char	*ft_strcpy(char *dest, char const *src);
-int		ft_strcmp(char const *s1, char const *s2);
-int		ft_write(int fd, char const *str, size_t len);
+size_t		ft_strlen(const char * str);
+char		*ft_strcpy(char *dest, char const *src);
+int			ft_strcmp(char const *s1, char const *s2);
+ssize_t		ft_write(int fd, char const *str, size_t len);
+ssize_t		ft_read(int fd, char const *str, size_t len);
 
 void	test_strlen();
 void	test_strcpy();
 void	test_strcmp();
+void	test_write();
+void	test_read();
 
 int	main(void)
 {
-
-	ft_write(1, "Hello World", ft_strlen("Hello World"));
-
 	printf("\n\n----STRLEN----\n");
 	test_strlen();
 	printf("\n\n----STRCPY----\n");
 	test_strcpy();
 	printf("\n\n----STRCMP----\n");
 	test_strcmp();
+	printf("\n\n----WRITE----\n");
+	test_write();
+	printf("\n\n----READ----\n");
+	test_read();
 
 	return (0);
 }
@@ -105,4 +112,53 @@ void	test_strcmp()
 	// s2 = NULL;
 	// printf("%d, %d\n", ft_strcmp(s1, s2), strcmp(s1, s2));
 	// printf("%d, %d\n", ft_strcmp(s1, s2), strcmp(s2, s1));
+}
+
+void	test_write()
+{
+	printf("---test1---\n");
+	char	*str = "My First Str\n";
+	printf("[write value: %ld, errno value %d]\n", ft_write(1, str, ft_strlen(str)), errno);
+	printf("[write value: %ld, errno value %d]\n", write(1, str, ft_strlen(str)), errno);
+
+	printf("---test2---\n");
+	usleep(5);
+
+	int	fd = open("./write_read", O_WRONLY);
+
+	printf("[write value: %ld, errno value %d]\n", ft_write(fd, str, ft_strlen(str)), errno);
+	printf("[write value: %ld, errno value %d]\n", write(fd, str, ft_strlen(str)), errno);
+	close(fd);
+
+	printf("---test3---\n");
+	usleep(5);
+
+	printf("[write value: %ld, errno value %d]\n", ft_write(1, str, ft_strlen(str)), errno);
+	printf("[write value: %ld, errno value %d]\n", write(1, str, ft_strlen(str)), errno);
+
+	printf("---test4---\n");
+	usleep(5);
+
+	fd = open("./write_read", O_RDONLY);
+	printf("[write value: %ld, errno value %d]\n", ft_write(fd, str, ft_strlen(str)), errno);
+	printf("[write value: %ld, errno value %d]\n", write(fd, str, ft_strlen(str)), errno);
+	close(fd);
+
+	printf("[write value: %ld, errno value %d]\n", ft_write(1, str, ft_strlen(str) - 5), errno);
+	printf("[write value: %ld, errno value %d]\n", write(1, str, ft_strlen(str) - 5), errno);
+}
+
+void	test_read()
+{
+	int fd = open("./write_read", O_RDONLY);
+	char	buff[500];
+
+	bzero(buff, 500);
+	printf("read value: %ld, errno: %d\n", ft_read(fd, buff, 10), errno);
+	printf("%s\n", buff);
+	bzero(buff, 500);
+	printf("my read value: %ld, errno: %d", ft_read(fd, buff, 10), errno);
+	printf("%s\n", buff);
+
+	close(fd);
 }
