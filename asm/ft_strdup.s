@@ -5,18 +5,21 @@ global	ft_strdup
 section	.text
 
 ft_strdup:
-	mov		rbp, rsp	;
-	call	ft_strlen	;
-	mov		rsi, rdi	;
-	mov		rax, rdi	;
-	call	malloc		;
-	cmp		rax, 0		;
-	jz		error		;
-	mov		rdi, rax	;
-	call	ft_strcpy	;
-	
-	ret ;
+
+	push	rdi					;
+	call	ft_strlen			;
+	mov		rsi, rdi			;
+	inc		rax					;
+	mov		rdi, rax			;
+	call	malloc	WRT ..plt	;
+	cmp		rax, 0				;
+	jz		error				;
+	pop		rsi					;
+	mov		rdi, rax			;
+	call	ft_strcpy			;
+	ret 						;
 
 error:
-	mov		rax, -1		;
-	ret					;
+	mov		rax, 0				;
+	pop		rdi					;
+	ret							;

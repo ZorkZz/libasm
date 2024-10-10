@@ -17,21 +17,22 @@ void	test_strcpy();
 void	test_strcmp();
 void	test_write();
 void	test_read();
+void	test_strdup();
 
 int	main(void)
 {
-	// printf("\n\n----STRLEN----\n");
-	// test_strlen();
-	// printf("\n\n----STRCPY----\n");
-	// test_strcpy();
-	// printf("\n\n----STRCMP----\n");
-	// test_strcmp();
-	// printf("\n\n----WRITE----\n");
-	// test_write();
-	// printf("\n\n----READ----\n");
-	// test_read();
-
-	printf("%s\n", ft_strdup("caca"));
+	printf("\n\n----STRLEN----\n");
+	test_strlen();
+	printf("\n\n----STRCPY----\n");
+	test_strcpy();
+	printf("\n\n----STRCMP----\n");
+	test_strcmp();
+	printf("\n\n----WRITE----\n");
+	test_write();
+	printf("\n\n----READ----\n");
+	test_read();
+	printf("\n\n----STRDUP----\n");
+	test_strdup();
 
 	return (0);
 }
@@ -164,4 +165,16 @@ void	test_read()
 	printf("%s\n", buff);
 
 	close(fd);
+}
+
+void	test_strdup()
+{
+	char	*str_to_dup = "aaaaa";
+	char	*str_dup = NULL;
+
+	printf("---test1---\n");
+	str_dup = ft_strdup(str_to_dup);
+	printf("str to dup: %s, str dup: %s\n", str_to_dup, str_dup);
+
+	free(str_dup);
 }

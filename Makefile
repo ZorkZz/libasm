@@ -4,7 +4,7 @@ SRCS = asm/ft_strlen.s asm/ft_strcpy.s asm/ft_strcmp.s asm/ft_write.s asm/ft_rea
 
 SRCS_TEST = main.c
 
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror -g3
 
 CC = cc
 
@@ -13,7 +13,7 @@ OBJS = $(SRCS:.s=.zizi)
 OBJS_TEST = $(SRCS_TEST:.c=.zozo)
 
 NA = nasm
-NA_FLAGS = -f elf64 
+NA_FLAGS = -f elf64 -g
 TEST_FLAGS = -lasm -L .
 
 RM = rm -f
