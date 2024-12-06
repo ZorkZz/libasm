@@ -41,14 +41,14 @@ $(NAME): $(OBJS)
 	@printf	"$(GREEN) $(DELETE_LINE)Compiling $(NAME) : DONE $(ENDL)\n"
 
 clean:
-	$(RM) write_read
-	$(RM) $(OBJS)
-	$(RM) $(OBJS_TEST)
+	@$(RM) write_read
+	@$(RM) $(OBJS)
+	@$(RM) $(OBJS_TEST)
 	@printf	"$(RED)Deleting objects : DONE $(RED)\n"
 
 fclean: clean
-	$(RM) $(NAME)
-	$(RM) test.run
+	@$(RM) $(NAME)
+	@$(RM) test.run
 	@printf "$(RED)Deleting executable : DONE $(RED)\n\n"
 
 test: $(OBJS_TEST)

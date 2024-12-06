@@ -148,6 +148,7 @@ void	test_write()
 	printf("[write value: %ld, errno value %d]\n", write(fd, str, ft_strlen(str)), errno);
 	close(fd);
 
+	printf("---test5---\n");
 	printf("[write value: %ld, errno value %d]\n", ft_write(1, str, ft_strlen(str) - 5), errno);
 	printf("[write value: %ld, errno value %d]\n", write(1, str, ft_strlen(str) - 5), errno);
 }
@@ -158,10 +159,16 @@ void	test_read()
 	char	buff[500];
 
 	bzero(buff, 500);
-	printf("read value: %ld, errno: %d\n", ft_read(fd, buff, 10), errno);
+	printf("read value: %ld, errno: %d\n", read(fd, buff, 12), errno);
 	printf("%s\n", buff);
 	bzero(buff, 500);
-	printf("my read value: %ld, errno: %d", ft_read(fd, buff, 10), errno);
+	printf("my read value: %ld, errno: %d\n", ft_read(fd, buff, 12), errno);
+	printf("%s\n", buff);
+
+	printf("read value: %ld, errno: %d\n", read(-1, buff, 12), errno);
+	printf("%s\n", buff);
+	bzero(buff, 500);
+	printf("my read value: %ld, errno: %d\n", ft_read(-1, buff, 12), errno);
 	printf("%s\n", buff);
 
 	close(fd);
