@@ -41,8 +41,8 @@ compare:
 	jz		checkFirst			;	check if end of str
 	mov		dl, BYTE[rsi + rcx]	;
 	cmp		dl, BYTE[rdi + rcx]	;
-	jl		sup					;
-	jg		inf					;	check if sup or inf
+	jb		sup					;
+	ja		inf					;	check if sup or inf
 	jmp		increment			;
 
 zero:
